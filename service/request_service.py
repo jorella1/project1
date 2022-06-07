@@ -8,6 +8,3 @@ def reimbursement_request(form):
     new_reimbursement_request(current_user,form.get("amount"),form.get("description"))
     flash('reimbursement request successfully submitted.')
     return redirect(url_for(".load_profile",type = current_user.account_type))
-
-def cancel_request(table):
-    cancel_request(table.get(""))
