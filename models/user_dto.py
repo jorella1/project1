@@ -16,4 +16,3 @@ class User:
     
     def get_id(self):
         return str(self.id)
-

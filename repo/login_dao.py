@@ -7,7 +7,7 @@ def select_user_byid(user_id):
     connection = get_connection()
     cursor = connection.cursor()
 
-    qry = f"SELECT * FROM user_table WHERE user_id = '{user_id}';"
+    qry = f"SELECT * FROM user_table WHERE user_id = {user_id};"
     
     try:
         cursor.execute(qry)
@@ -16,7 +16,7 @@ def select_user_byid(user_id):
             record = cursor.fetchone()
             if record is None:
                 break
-            user_login = User(record[0],record[1],record[2],record[3]).get_id()
+            user_login = User(record[0],record[1],record[2],record[3])
             return user_login
             
     except(psycopg2.DatabaseError) as error:
@@ -39,8 +39,8 @@ def select_user(username, password) -> User:
             if record is None:
                 break
             user_login = User(record[0],record[1],record[2],record[3])
-            print(qry)
             return user_login
+
     except(psycopg2.DatabaseError) as error:
         print(error)
     
