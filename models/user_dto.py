@@ -1,11 +1,19 @@
-from csv import unregister_dialect
-from ssl import _PasswordType
-
-
 class User:
-    def __init__(self,user_id,username,password,account_type):
-        self.user_id = user_id
+    def __init__(self,id,username,password,account_type):
+        self.id = id
         self.username = username
         self.password = password
         self.account_type = account_type
+    
+    def is_authenticated(self):
+        return True
+    
+    def is_active(self):
+        return True
+    
+    def is_anonymous(self):
+        return False
+    
+    def get_id(self):
+        return str(self.id)
 
