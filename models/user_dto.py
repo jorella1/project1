@@ -5,6 +5,9 @@ class User:
         self.password = password
         self.account_type = account_type
     
+    def _repr__(self):
+        return print(f"Current User: {self.id}")
+        
     def is_authenticated(self):
         return True
     

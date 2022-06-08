@@ -14,76 +14,86 @@
   {%- endif %}
   {%- endwith %}
     <div class="jumbotron">
-    {% if current_user.is_authenticated %}
-      <h1>Welcome Back, {{name}}</h1>
-    {% endif %}
-    <h3>Add your reimbursement below:</h3><br>
-      <form action="{{url_for('submit_request')}}" method = "POST">
-        <label for = "amount">Reimbursement: </label>
-        <label>$</label>
-        <input type = "number" id = "amount" name = "amount" min = "1" max = "1000" step = ".01"><br><br>
-        <label for ="description">Reason: </label><br>
-        <textarea name= "description" cols= "50" rows= "2"></textarea><br><br>
-        <input type = "submit" value = "Submit">
-
-    </form>
-    <h3>Your Reimbursement Requests:</h3>
-    <table class= "table">
-        <thead>
-            <tr>
-                <th scope="col">Request ID</th>
-                <th scope="col">Username</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Description</th>
-                <th scope="col">Status</th>
-            </tr>
-        </thead>
-            {%  for row in curr_requests %}
-            <tr>
-                {% for cell in row %}
-                <td>
-                    {{ cell }}
-                </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-    </table>
-
-    {% if current_user.account_type == "Manager" %}
-        <h2>Manager Options</h2>
-        <form action="{{url_for('submit_request')}}" method = "POST">
-          <label for = "request_id">Request ID: </label>
-          <input type = "number" id = "request_id" name = "amount" min = "1" max = "1000" step = "1">
-          <label for = "update_status">Update Status: </label>
-          <select name="update_status" id="update_status">
-            <option value="accept">Accept</option>
-            <option value="decline">Decline</option>
-          </select>
-          <input type = "submit" value = "Submit">
+      <div>
+        {% if current_user.is_authenticated %}
+          <h1>Welcome Back, {{name}}</h1>
+        {% endif %}
+        <h3>Add your reimbursement below:</h3><br>
+          <form id = "employee_request" action="{{url_for('submit_request')}}" method = "POST">
+            <label for = "amount">Reimbursement: </label>
+            <label>$</label>
+            <input type = "text" id = "amount" name = "amount" min = "1" max = "1000" step = ".01"><br><br>
+            <label for ="description">Reason: </label><br>
+            <textarea name= "description" cols= "50" rows= "2"></textarea><br><br>
+            <input type = "submit" value = "Submit">
         </form>
-            <h3>All Reimbursement Requests:</h3>
-            <table class= "table">
-                <thead>
-                    <tr>
-                        <th scope="col">Request ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                {%  for row in all_requests %}
+        <h3>Your Reimbursement Requests:</h3>
+        <br>
+          <form action="{{url_for('cancel_request')}}" method = "POST">
+            <label for = "cancel_id">Request ID: </label>
+            <input type = "text" id = "cancel_id" name = "cancel_id" min = "1" max = "1000" step = "1">
+            </select>
+            <input type = "submit" value = "Cancel Request">
+        </form>
+
+        <br>
+        <table class= "table">
+            <thead>
                 <tr>
-                    {% for cell in row %}
-                    <td>
-                        {{ cell }}
-                    </td>
-                    {% endfor %}
+                    <th scope="col">Request ID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+                {%  for row in curr_requests %}
+                <tr>
+                  <td>{{ row.id }}</td>
+                  <td>{{ row.user_id }}</td>
+                  <td>{{ row.amount }}</td>
+                  <td>{{ row.reason }}</td>
+                  <td>{{ row.status }}</td>
                 </tr>
                 {% endfor %}
         </table>
-    {% endif %}
-    
+      </div>
+      <div>
+        {% if current_user.account_type == "Manager" %}
+            <h2>Manager Options</h2>    
+            <form action="{{url_for('handle_request')}}" method = "POST">
+              <label for = "request_id">Request ID: </label>
+              <input type = "number" id = "request_id" name = "request_id" min = "1" max = "1000" step = "1">
+              <label for = "update_status">Update Status: </label>
+              <select name="update_status" id="update_status">
+                <option value="accept">Accept</option>
+                <option value="decline">Decline</option>
+              </select>
+              <input type = "submit" value = "Submit">
+            </form>
+                <h3>All Reimbursement Requests:</h3>
+                <table class= "table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Request ID</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    {%  for row in all_requests %}
+                    <tr>
+                        <td>{{ row.id }}</td>
+                        <td>{{ row.user_id }}</td>
+                        <td>{{ row.amount }}</td>
+                        <td>{{ row.reason }}</td>
+                        <td>{{ row.status }}</td>
+                    </tr>
+                    {% endfor %}
+            </table>
+        {% endif %}
+    </div>
     </div>
    </div>
 {%- endblock %}
