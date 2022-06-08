@@ -56,3 +56,20 @@ def cancel_request(request_id):
     finally:
         if connection is not None:
             connection.close()
+
+def get_request(request_id):
+    connection = get_connection()
+    cursor = connection.cursor()
+    qry = "SELECT * FROM reimbursements WHERE request_id = '{request_id}' RETURNING request_id;"
+
+    try:
+        cursor.execute(qry)
+        request_id = cursor.fetchone()
+        connection.commit()
+        return request_id
+    except(psycopg2.DatabaseError) as error:
+        print(error)
+    
+    finally:
+        if connection is not None:
+            connection.close()
