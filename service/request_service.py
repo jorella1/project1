@@ -12,7 +12,7 @@ def reimbursement_request(form):
 
 def alter_request(form):
     request_dto = get_request(form.get("request_id"))
-   
+    print(request_dto.username)
     if int(current_user.id) == request_dto.user_id:
         flash("Users cannot modify their own requests")
         return redirect(url_for(".load_profile",type = current_user.account_type))

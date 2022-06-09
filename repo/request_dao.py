@@ -8,10 +8,10 @@ def new_reimbursement_request(login_dto:User,amount,reason):
     connection = get_connection()
     cursor = connection.cursor()
     status = "pending"
-    qry = "INSERT INTO reimbursements VALUES (default,%s,%s,%s,%s) RETURNING request_id;"
+    qry = "INSERT INTO reimbursements VALUES (default,%s,%s,%s,%s,%s) RETURNING request_id;"
 
     try:
-        cursor.execute(qry,(login_dto.id,amount,reason,status))
+        cursor.execute(qry,(login_dto.id,amount,reason,status,login_dto.username))
         account_id = cursor.fetchone()[0]
         connection.commit()
         return account_id
@@ -69,7 +69,7 @@ def get_request(request_id) -> Request:
         cursor.execute(qry)
         record = cursor.fetchone()
         if record is not None:
-            request = Request(record[0],record[1],record[2],record[3],record[4])
+            request = Request(record[0],record[1],record[2],record[3],record[4],record[5])
             connection.commit()
             return request
         return None
@@ -93,7 +93,7 @@ def get_request_table():
         records = cursor.fetchall()
         if records is not None:
             for rec in records:
-                request = Request(rec[0],rec[1],rec[2],rec[3],rec[4])
+                request = Request(rec[0],rec[1],rec[2],rec[3],rec[4],rec[5])
                 requests.append(request)
             connection.commit()
             return requests
@@ -115,7 +115,7 @@ def get_user_requests(user_id):
         records = cursor.fetchall()
         if records is not None:
             for rec in records:
-                request = Request(rec[0],rec[1],rec[2],rec[3],rec[4])
+                request = Request(rec[0],rec[1],rec[2],rec[3],rec[4],rec[5])
                 requests.append(request)
             connection.commit()
             return requests

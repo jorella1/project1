@@ -50,7 +50,7 @@
                 {%  for row in curr_requests %}
                 <tr>
                   <td>{{ row.id }}</td>
-                  <td>{{ row.user_id }}</td>
+                  <td>{{ row.username }}</td>
                   <td>{{ row.amount }}</td>
                   <td>{{ row.reason }}</td>
                   <td>{{ row.status }}</td>
@@ -85,7 +85,7 @@
                     {%  for row in all_requests %}
                     <tr>
                         <td>{{ row.id }}</td>
-                        <td>{{ row.user_id }}</td>
+                        <td>{{ row.username }}</td>
                         <td>{{ row.amount }}</td>
                         <td>{{ row.reason }}</td>
                         <td>{{ row.status }}</td>
