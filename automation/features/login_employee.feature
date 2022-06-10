@@ -13,7 +13,7 @@ Feature: I can login to the service with my username and password as an employee
         |   jorell      |   password    |   Welcome Back, jorell    |
         |   joeor1      |   password1   |   Welcome Back, joeor1    |
 
-        Scenario Outline: Entering your username and password incorrectly will prompt the user to try again
+    Scenario Outline: Entering your username and password incorrectly will prompt the user to try again
 
         Given I am on the project homepage
         When I click the login button

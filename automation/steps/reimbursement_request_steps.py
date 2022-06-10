@@ -1,5 +1,6 @@
 from behave import when, then, given
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.common.by import By
 
 @given(u'An employee is on the login page')
 def step_home_page(context):
@@ -20,7 +21,15 @@ def step_impl(context,amount,description):
     context.Project_profile.request_description().send_keys(description)
 
 
-@then(u'They will submit their request and be taken back to their profile page')
-def step_impl(context):
+@then(u'They will submit their request and be taken back to their profile page to see {amount} and {description}')
+def step_impl(context, amount, description):
     context.Project_profile.submit_request().click()
+    assert amount and description in context.driver.find_element(By.ID, "curr_table").text
+
+
+@then(u'They will log out')
+def step_impl(context):
     context.Project_login.logout_button().click()
+
+
+

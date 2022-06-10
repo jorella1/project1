@@ -6,8 +6,8 @@ from POM.profile_page import Project_profile
 
 def before_all(context: Context):
 
-    context.driver = webdriver.Chrome("utils/Driver/chromedriver.exe")
-    #context.driver = webdriver.Firefox("utils/Driver/")
+    #context.driver = webdriver.Chrome("utils/Driver/chromedriver.exe")
+    context.driver = webdriver.Firefox("utils/Driver/")
     context.Project_landing = Project_landing(context.driver)
     context.Project_login = Project_login(context.driver)
     context.Project_profile = Project_profile(context.driver)

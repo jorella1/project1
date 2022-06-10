@@ -1,5 +1,6 @@
 from behave import when, then, given
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.common.by import By
 
 @given(u'I am on the project homepage')
 def step_enter_homepage(context):
@@ -17,7 +18,7 @@ def step_enter_login_info(context, username, password):
 @when(u'I click the submit button I should be redirected to the profile screen with {title}')
 def step_redirect_to_profile(context,title):
     context.Project_login.login_button().click()
-    assert context.driver.title == title
+    assert context.driver.find_element(By.ID, "welcome_title").text == title
 
 @then(u'I can click the logout button and am taken back to the login screen')
 def step_impl(context):
@@ -36,12 +37,6 @@ def step_submit_login_info(context):
     context.Project_login.login_button().click()
     assert context.driver.title == "Login"
 
-
-
-
-""" @when(u'I enter ')
-def step_impl(context, password):
-    context.project_login.password_bar().send_keys(password) """    
 
 
 
