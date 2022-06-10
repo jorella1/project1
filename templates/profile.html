@@ -21,7 +21,7 @@
     <div class="jumbotron">
       <div>
         {% if current_user.is_authenticated %}
-          <h1>Welcome Back, {{name}}</h1>
+          <h1 id = "welcome_title">Welcome Back, {{name}}</h1>
         {% endif %}
         <h3>Add your reimbursement below:</h3><br>
           <form id = "employee_request" action="{{url_for('submit_request')}}" method = "POST">
@@ -42,7 +42,7 @@
         </form>
 
         <br>
-        <table class= "table">
+        <table class= "table" id = "curr_table">
             <thead>
                 <tr>
                     <th scope="col">Request ID</th>
@@ -77,7 +77,7 @@
               <input type = "submit" value = "Submit">
             </form>
                 <h3>All Reimbursement Requests:</h3>
-                <table class= "table">
+                <table class= "table" id = "all_table">
                     <thead>
                         <tr>
                             <th scope="col">Request ID</th>

@@ -24,6 +24,6 @@
 
 notes from brian:
 look up bug reporting and bug fixing
-
+pytest coverage
 
 
