@@ -61,14 +61,22 @@ def load_profile(type):
 @app.route('/request/submission', methods = ["POST"])
 @login_required
 def submit_request():
+    if current_user.is_active() == False:
+        return redirect(url_for('.login_page'))
     return reimbursement_request(request.form)
 
 @app.route('/request/submit',methods =["POST"])
+@login_required
 def handle_request():
+    if current_user.is_active() == False:
+        return redirect(url_for('.login_page'))
     return alter_request(request.form)
 
 @app.route('/request/cancel',methods =["POST"])
-def cancel_request():
+@login_required
+def cancel_request():    
+    if current_user.is_active() == False:
+        return redirect(url_for('.login_page'))
     return cancel_requests(request.form)
 
 #Logout Button

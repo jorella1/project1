@@ -1,4 +1,5 @@
-from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.chrome.webdriver import WebDriver
+#from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
@@ -14,8 +15,8 @@ class Project_login:
     def password_bar(self):
         return self.driver.find_element(By.ID, "user_pass")
 
-    def submit_button(self):
-        return self.driver.find_element(By.CSS_SELECTOR, ".jumbotron > form:nth-child(3) > input:nth-child(9)")
+    def login_button(self):
+        return self.driver.find_element(By.ID, "submit_button")
 
     def logout_button(self):
         return self.driver.find_element(By.CSS_SELECTOR, ".nav > li:nth-child(3) > a:nth-child(1)")

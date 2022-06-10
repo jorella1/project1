@@ -29,8 +29,8 @@
             <label>$</label>
             <input type = "text" id = "amount" name = "amount" min = "1" max = "1000" step = ".01"><br><br>
             <label for ="description">Reason: </label><br>
-            <textarea name= "description" cols= "50" rows= "2"></textarea><br><br>
-            <input type = "submit" value = "Submit">
+            <textarea id = "description" name= "description" cols= "50" rows= "2"></textarea><br><br>
+            <input id = "submit_request" type = "submit" value = "Submit">
         </form>
         <h3>Your Reimbursement Requests:</h3>
         <br>
@@ -38,7 +38,7 @@
             <label for = "cancel_id">Request ID: </label>
             <input type = "text" id = "cancel_id" name = "cancel_id" min = "1" max = "1000" step = "1">
             </select>
-            <input type = "submit" value = "Cancel Request">
+            <input id = "cancel_request_button" type = "submit" value = "Cancel Request">
         </form>
 
         <br>
@@ -84,7 +84,7 @@
                             <th scope="col">Username</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Srequetatus</th>
                         </tr>
                     </thead>
                     {%  for row in all_requests %}
