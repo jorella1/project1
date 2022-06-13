@@ -1,3 +1,5 @@
+from logging import FileHandler, StreamHandler
+from logging.config import dictConfig
 from flask import Flask, render_template, request, url_for, redirect
 from flask_login import LoginManager, current_user, login_required, logout_user
 from flask_bootstrap import Bootstrap
@@ -7,6 +9,25 @@ from repo.login_dao import select_user_byid
 from service.login_service import verify_login
 from service.request_service import reimbursement_request, manager_profile, employee_profile, alter_request, cancel_requests
 
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://sys.stdout',
+        'formatter': 'default'
+    },
+    'file': {'class': 'logging.FileHandler',
+        'filename': 'status.log'
+    }
+    },
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi', 'file']
+    }
+}) 
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -37,10 +58,11 @@ def index():
 @app.route('/login', methods = ["GET","POST"])
 def login_page():
     if request.method == "GET":
-        if current_user.is_active:
+        if current_user.is_active:   
             return redirect(url_for('.load_profile',type = current_user.account_type))
         return render_template("login.html")
     else:
+        app.logger.info('%s is attempting to login', request.form.get("user_name"))
         return verify_login(request.form) 
 
 #Home Page after Login
@@ -50,10 +72,13 @@ def load_profile(type):
     if current_user.is_active == False:
         return redirect(url_for('.login_page'))
     type = current_user.account_type
+    
     if type == "Manager":
-       return manager_profile()
+        app.logger.info('%s logged in successfully as a Manager', current_user.username)
+        return manager_profile()
     
     elif type == "Employee":
+        app.logger.info('%s logged in successfully as an Employee', current_user.username)
         return employee_profile()
 
 
@@ -63,6 +88,7 @@ def load_profile(type):
 def submit_request():
     if current_user.is_active() == False:
         return redirect(url_for('.login_page'))
+    app.logger.info('%s is submitting a request', current_user.username)
     return reimbursement_request(request.form)
 
 @app.route('/request/submit',methods =["POST"])
@@ -70,6 +96,7 @@ def submit_request():
 def handle_request():
     if current_user.is_active() == False:
         return redirect(url_for('.login_page'))
+    app.logger.info('%s is updating a request', current_user.username)
     return alter_request(request.form)
 
 @app.route('/request/cancel',methods =["POST"])
@@ -77,11 +104,14 @@ def handle_request():
 def cancel_request():    
     if current_user.is_active() == False:
         return redirect(url_for('.login_page'))
+    app.logger.info('%s is canceling their request', current_user.username)
     return cancel_requests(request.form)
 
 #Logout Button
 @app.route('/logout')
+@login_required
 def logout():
+    app.logger.info('%s is logging out', current_user.username)
     logout_user()
     return redirect(url_for('login_page'))
     
