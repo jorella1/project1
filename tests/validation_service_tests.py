@@ -3,7 +3,7 @@ import pytest
 
 @pytest.mark.parametrize("amount, expected",(
     ('0',True),('cat',False),('-5',False),('5',True),('5000',False),('1000',True),
-    ('999',True),('1',True),('fsdf sdfs',False),('123',True),('-10000',False),('014123412=1412095$^*2342',False)
+    ('999',True),('1',True),('fsdf sdfs',False),('123',True),('-10000',False),('014123412=1412095$^*2342',False), ('111.111', False)
     )) 
 
 def test_validate_requested_amount(amount,expected):
