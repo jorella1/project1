@@ -1,5 +1,5 @@
 from behave import when, then, given
-from requests import request
+#from requests import request
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait

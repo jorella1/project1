@@ -1,4 +1,4 @@
-from service.validate_service import *
+from app.service.validate_service import *
 import pytest
 
 @pytest.mark.parametrize("amount, expected",(

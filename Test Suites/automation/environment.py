@@ -1,8 +1,10 @@
-from selenium import webdriver
 from behave.runner import Context
-from POM.project_login import Project_login
+from selenium import webdriver
+
 from POM.landing_page import Project_landing
 from POM.profile_page import Project_profile
+from POM.project_login import Project_login
+
 
 def before_all(context: Context):
 

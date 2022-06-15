@@ -1,5 +1,7 @@
-from service.validate_service import *
 import pytest
+from app.service.validate_service import (validate_description_length,
+                                          validate_requested_amount)
+
 
 @pytest.mark.parametrize("amount, expected",(
     ('0',True),('cat',False),('-5',False),('5',True),('5000',False),('1000',True),

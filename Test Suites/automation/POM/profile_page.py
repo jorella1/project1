@@ -1,7 +1,8 @@
 #from selenium.webdriver.chrome.webdriver import WebDriver
-from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.support.select import Select
+
 
 class Project_profile:
     def __init__(self, driver: WebDriver):

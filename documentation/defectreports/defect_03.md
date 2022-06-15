@@ -15,6 +15,6 @@
 ### Expected Result
     Account page flash: "please enter a correct dollar amount"
 ### Status
-    Pending
+    Fixed
 ### Notes
-    
+    validation service methods were not being called in request service
