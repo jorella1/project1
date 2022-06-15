@@ -91,7 +91,8 @@ def submit_request():
     app.logger.info('%s is submitting a request', current_user.username)
     return reimbursement_request(request.form)
 
-@app.route('/request/submit',methods =["POST"])
+#Alter request
+@app.route('/request/alter',methods =["POST"])
 @login_required
 def handle_request():
     if current_user.is_active() == False:
