@@ -35,7 +35,7 @@ All username/password entries were added to the database for testing.
 ## Release Control
     #TODO
 ## Risk Analysis
-    #TODO
+    The method in which Flask-Login handles sessions means that the user must completely close the browser window in order to logout or end their session if the user does not explicity log out. If a manager were being neglegent, an unauthorized user could access the manager's account if the manager had just closed out a tab without logging out and manipulate reimbursement requests without the manager's knowlege.
 ## Review and Approvals
     #TODO
 
