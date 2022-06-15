@@ -29,6 +29,8 @@ All username/password entries were added to the database for testing.
     Unit Testing: Python and Pytest
     Automation Testing: Selenium/Behave
     API Testing: Postman
+    
+    These test suites can be found in the Test Suites folder
 
 ## Release Control
     #TODO
