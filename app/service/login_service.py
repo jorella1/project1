@@ -8,7 +8,7 @@ def verify_login(form):
     login_dto = select_user(form.get("user_name"),form.get("user_pass"))
     if login_dto is None:
         flash('Please check your login details and try again.')
-        return redirect(url_for('login_page'))
+        return redirect(url_for('main.login_page'))
     
     login_user(login_dto)
 
