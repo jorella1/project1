@@ -1,15 +1,37 @@
 # Reimbursement Management Systems
 
-## Overview
+## Description
 
-This is a management tool for employee's and managers to request, approve and decline reimbursement requests through a simple interface. Employee's can submit their reimbursement requests with a dollar amount and description. These requests can also be viewed after submission and canceled. Managers have the same features as employees but they also have the option to decline and accept requests of employees or other managers. Managers are unable to change the status of their own requests.
+This is a management tool for employee's and managers to request, approve and decline reimbursement requests through a simple interface. Employee's can submit their reimbursement requests with a dollar amount and description. 
+
+## Technologies Used
+    - HTML
+    - SQL
+    - Python
+    - Flask
+    - Bootstrap
+    - Selenium
+    - Behave
+    - PyTest
+    - psycopg2
+    - Jinja
+
+## Features Implemented
+
+- Employee and Manager login
+- Employee and Manager reimbursement requests
+- Ability to view and cancel previous requests
+- Employee and Manager logout with profile saved
+- Managers options:
+    - Approve/Decline requests
+    - View all employee and management requests
+    - Inability to alter own requests
+
 
 ## How to Use
+Clone the repository and in the main directory:
+
     pip install -r requirements.txt
     flask run
 
-## Resources
-
-- Kanban Board with User Stories:
-    https://trello.com/b/joFzxAmh/project1
 

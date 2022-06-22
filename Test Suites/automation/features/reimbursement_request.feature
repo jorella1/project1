@@ -9,5 +9,5 @@ Scenario Outline: An employeee can submit a request after logging in
     Examples:
     | username     | password   |amount     |   description          |
     |  tylerb1     |pass2       |50         |I dont feel like working|
-    |  joeor1      |password1   |100        |8 hours overtime        |
+    |  joeor1      |password1   |111        |overtime        |
 
